@@ -69,7 +69,7 @@ export async function codeSystemImportHandler(req: Request, res: Response): Prom
       await importCodeSystem(db, codeSystem, params.concept, params.property);
     });
   } catch (err) {
-    sendOutcome(res, normalizeOperationOutcome(err));
+    sendOutcome(req, res, normalizeOperationOutcome(err));
     return;
   }
   await sendOutputParameters(req, res, operation, allOk, codeSystem);

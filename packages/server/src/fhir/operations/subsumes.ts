@@ -25,7 +25,7 @@ export const codeSystemSubsumesOperation = asyncWrap(async (req: Request, res: R
   const params = parseInputParameters<CodeSystemSubsumesParameters>(operation, req);
 
   if (!params.system || !params.codeA || !params.codeB) {
-    sendOutcome(res, badRequest('Must specify system, codeA, and codeB parameters'));
+    sendOutcome(req, res, badRequest('Must specify system, codeA, and codeB parameters'));
     return;
   }
   const codeSystem = await findTerminologyResource<CodeSystem>('CodeSystem', params.system, params.version);

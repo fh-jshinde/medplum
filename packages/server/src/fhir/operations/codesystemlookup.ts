@@ -27,7 +27,7 @@ export async function codeSystemLookupHandler(req: Request, res: Response): Prom
   } else if (params.system && params.code) {
     coding = { system: params.system, code: params.code };
   } else {
-    sendOutcome(res, badRequest('No coding specified'));
+    sendOutcome(req, res, badRequest('No coding specified'));
     return;
   }
 
@@ -66,7 +66,7 @@ export async function codeSystemLookupHandler(req: Request, res: Response): Prom
   const result = await lookup.execute(db);
 
   if (result.length < 1) {
-    sendOutcome(res, notFound);
+    sendOutcome(req, res, notFound);
     return;
   }
 

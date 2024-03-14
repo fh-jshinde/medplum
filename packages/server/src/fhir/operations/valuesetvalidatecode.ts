@@ -36,7 +36,7 @@ export const valueSetValidateOperation = asyncWrap(async (req: Request, res: Res
   const params = parseInputParameters<ValueSetValidateCodeParameters>(operation, req);
 
   if (!params.url) {
-    sendOutcome(res, badRequest('Missing ValueSet URL'));
+    sendOutcome(req, res, badRequest('Missing ValueSet URL'));
     return;
   }
 
@@ -48,7 +48,7 @@ export const valueSetValidateOperation = asyncWrap(async (req: Request, res: Res
   } else if (params.codeableConcept?.coding) {
     codings.push(...params.codeableConcept.coding);
   } else {
-    sendOutcome(res, badRequest('No coding specified'));
+    sendOutcome(req, res, badRequest('No coding specified'));
     return;
   }
 

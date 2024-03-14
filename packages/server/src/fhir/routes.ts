@@ -194,7 +194,7 @@ protectedRoutes.post(
     }
     const ctx = getAuthenticatedContext();
     await ctx.repo.validateResource(req.body);
-    sendOutcome(res, allOk);
+    sendOutcome(req, res, allOk);
   })
 );
 
@@ -205,7 +205,7 @@ protectedRoutes.post(
     const ctx = getAuthenticatedContext();
     const { resourceType, id } = req.params;
     await ctx.repo.reindexResource(resourceType, id);
-    sendOutcome(res, allOk);
+    sendOutcome(req, res, allOk);
   })
 );
 
@@ -216,7 +216,7 @@ protectedRoutes.post(
     const ctx = getAuthenticatedContext();
     const { resourceType, id } = req.params;
     await ctx.repo.resendSubscriptions(resourceType, id);
-    sendOutcome(res, allOk);
+    sendOutcome(req, res, allOk);
   })
 );
 
@@ -254,7 +254,7 @@ protectedRoutes.use(
       if (!isOk(result[0])) {
         throw new OperationOutcomeError(result[0]);
       }
-      sendOutcome(res, result[0]);
+      sendOutcome(req, res, result[0]);
     } else {
       await sendResponse(req, res, result[0], result[1]);
     }

@@ -35,7 +35,7 @@ export async function codeSystemValidateCodeHandler(req: Request, res: Response)
   } else if (params.url && params.code) {
     coding = { system: params.url, code: params.code };
   } else {
-    sendOutcome(res, badRequest('No coding specified'));
+    sendOutcome(req, res, badRequest('No coding specified'));
     return;
   }
 
