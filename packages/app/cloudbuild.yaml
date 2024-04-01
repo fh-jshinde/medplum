@@ -5,9 +5,12 @@ steps:
     # Install
     - name: 'gcr.io/cloud-builders/npm'
       args: ['install']
+      dir: 'packages/app'
     # Build
     - name: 'gcr.io/cloud-builders/npm'
       args: ['run', 'build']
+      dir: 'packages/app'
     # Deploy
     - name: 'asia-south1-docker.pkg.dev/$PROJECT_ID/firebase/firebase'
       args: ['deploy', '--project=fh-dev-svc', '--only=hosting:fh-dev-svc-medplum-hosting']
+      dir: 'packages/app'
