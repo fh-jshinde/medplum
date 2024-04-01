@@ -6,8 +6,8 @@ steps:
     ./scripts/build.sh
 - name: 'gcr.io/cloud-builders/docker'
   env:
-    - DOCKERHUB_REPOSITORY='asia-south1-docker.pkg.dev/$PROJECT_ID/medplum/medplum-server'
-    - GITHUB_SHA='${COMMIT_SHA}'
+    - DOCKERHUB_REPOSITORY=asia-south1-docker.pkg.dev/$PROJECT_ID/medplum/medplum-server
+    - GITHUB_SHA=$COMMIT_SHA
   script: |
     ./scripts/build-docker.sh
 # # Step 3: Building the Medplum
