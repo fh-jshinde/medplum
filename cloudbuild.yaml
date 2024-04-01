@@ -1,0 +1,35 @@
+steps:
+# Step 2: Building the Medplum - installing dependencies
+- name: 'gcr.io/cloud-builders/npm'
+  # args: ['run', 'build', '--filter=@medplum/server']
+  script: |
+    ./scripts/build.sh
+  dir: 'medplum'
+- name: 'gcr.io/cloud-builders/docker'
+  env:
+    - DOCKERHUB_REPOSITORY='asia-south1-docker.pkg.dev/$PROJECT_ID/medplum/medplum-server'
+    - GITHUB_SHA='${COMMIT_SHA}'
+  script: |
+    ./scripts/build-docker.sh
+  dir: 'medplum'
+# # Step 3: Building the Medplum
+# - name: 'gcr.io/cloud-builders/npm'
+#   args: ['run', 'build', '--filter=@medplum/server']
+#   dir: 'medplum'
+# Step 4: Build the Medplum docker image
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: ['build', '--build-arg', 'TARGETPLATFORM="linux/amd64"', '-t', 'asia-south1-docker.pkg.dev/fh-dev-svc/medplum/medplum:latest', '.']
+#   dir: 'medplum'
+
+# #Step 1: Pulling the medplum docker image
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: pull-medplum-server-image
+#   args: ['pull', 'medplum/medplum-server']
+# # Step 2: Tagging the medplum docker image to Artifact Registry
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: tag-medplum-server-image
+#   args: ['tag', 'medplum/medplum-server:latest', 'asia-south1-docker.pkg.dev/fh-dev-svc/medplum/medplum-server:latest']
+# # Step 3: Pushing the medplum docker image to Artifact Registry
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: push-medplum-server-image
+#   args: ['push', 'asia-south1-docker.pkg.dev/fh-dev-svc/medplum/medplum-server:latest']
