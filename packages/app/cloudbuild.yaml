@@ -4,10 +4,6 @@ options:
 steps:
     # Install
     - name: 'gcr.io/cloud-builders/npm'
-      args: ['install']
-      dir: 'packages/app'
-    # Build
-    - name: 'gcr.io/cloud-builders/npm'
       args: ['run', 'build']
       dir: 'packages/app'
     # Deploy
