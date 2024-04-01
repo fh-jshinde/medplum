@@ -24,8 +24,11 @@ tar \
   packages/definitions/dist \
   packages/fhir-router/package.json \
   packages/fhir-router/dist \
+  packages/app/package.json \
+  packages/app/dist \
   packages/server/package.json \
   packages/server/dist
+  
 
 # Target platforms
 PLATFORMS="--platform linux/amd64,linux/arm64,linux/arm/v7"
