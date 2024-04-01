@@ -9,6 +9,7 @@ steps:
     - DOCKERHUB_REPOSITORY=asia-south1-docker.pkg.dev/$PROJECT_ID/medplum/medplum-server
     - GITHUB_SHA=$COMMIT_SHA
   script: |
+    docker buildx create --use --platform=linux/amd64,linux/arm64,linux/arm/v7 --name multi-platform-builder
     ./scripts/build-docker.sh
 # # Step 3: Building the Medplum
 # - name: 'gcr.io/cloud-builders/npm'
