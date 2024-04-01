@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": " fh-dev-svc-medplum-hosting",
     "public": "dist",
     "ignore": [
       "firebase.json",
