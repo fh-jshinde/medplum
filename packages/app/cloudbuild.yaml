@@ -10,5 +10,5 @@ steps:
       args: ['run', 'build']
     # Deploy
     - name: 'asia-south1-docker.pkg.dev/$PROJECT_ID/firebase/firebase'
-      args: ['deploy', '--project=fh-dev-svc', '--only=hosting:fh-dev-svc-medplum-hosting']
+      args: ['deploy', '--project=fh-dev-svc', '--only=hosting:medplum']
       dir: 'packages/app'
