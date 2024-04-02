@@ -1,9 +1,10 @@
 steps:
-# Step 2: Building the Medplum - installing dependencies
+# Step 1: Building the Medplum - installing dependencies
 - name: 'gcr.io/cloud-builders/npm'
   # args: ['run', 'build', '--filter=@medplum/server']
   script: |
     ./scripts/build.sh
+# Step 2: Building the Medplum docker image.
 - name: 'gcr.io/cloud-builders/docker'
   env:
     - DOCKERHUB_REPOSITORY=asia-south1-docker.pkg.dev/$PROJECT_ID/medplum/medplum-server
@@ -11,6 +12,10 @@ steps:
   script: |
     docker buildx create --use --platform=linux/amd64,linux/arm64,linux/arm/v7 --name multi-platform-builder
     ./scripts/build-docker.sh
+# Deploy firebase webapp
+- name: 'asia-south1-docker.pkg.dev/$PROJECT_ID/firebase/firebase'
+  args: ['deploy', '--project=fh-dev-svc', '--only=hosting:fh-dev-svc-medplum']
+  dir: 'packages/app'
 # # Step 3: Building the Medplum
 # - name: 'gcr.io/cloud-builders/npm'
 #   args: ['run', 'build', '--filter=@medplum/server']
